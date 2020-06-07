@@ -21,6 +21,7 @@ void test_vector();
 string split_string(string);
 string abbrev_name(string);
 bool consecutiveDucks (unsigned int);
+void data_conversion();
 
 int main() {
 
@@ -31,7 +32,8 @@ int main() {
 //	test_vector();
 //	cout << split_string("sam harris") << endl;
 //	cout << abbrev_name("Noah Centineo") << endl;
-	cout << consecutiveDucks (64) << endl;;
+//	cout << consecutiveDucks (64) << endl;
+	data_conversion();
 //	cout << "Result: " << summation(8) << endl;
 	return 0;
 }
@@ -201,4 +203,21 @@ bool consecutiveDucks (unsigned int num){
 	}
 
 	return !check;
+}
+
+void data_conversion(){
+	int total{};
+	int num1{},num2{},num3{};
+	const int count{3};
+
+	cout << "Enter 3 numbers seperated by space: ";
+	cin >> num1 >> num2 >> num3;
+
+	total = num1+num2+num3;
+	double average{0.0};
+
+	average = total/count;
+
+	cout << "The sum of the numbers is " << total << endl;
+	cout << "The average of the numbers is " << average << endl;
 }
