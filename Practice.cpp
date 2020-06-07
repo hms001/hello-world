@@ -9,6 +9,8 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <iomanip> //set for precision
+#include <limits> //set for numeric limits
 
 using namespace std;
 
@@ -22,6 +24,13 @@ string split_string(string);
 string abbrev_name(string);
 bool consecutiveDucks (unsigned int);
 void data_conversion();
+void display_pyramid();
+void logical_operators(int age, bool parental_consent, bool ssn, bool accidents);
+void convert_cents();
+void convert_cents_modulus();
+void shipping_cost_calculator();
+void conditional_operator();
+int count_numbers(const vector<int> &vec);
 
 int main() {
 
@@ -33,7 +42,19 @@ int main() {
 //	cout << split_string("sam harris") << endl;
 //	cout << abbrev_name("Noah Centineo") << endl;
 //	cout << consecutiveDucks (64) << endl;
-	data_conversion();
+//	data_conversion();
+//	display_pyramid();
+//	bool parental_consent{1};
+//	bool ssn{1};
+//	bool accidents{0};
+//	int age = 16;
+//	logical_operators(age,parental_consent,ssn,accidents);
+//	convert_cents();
+//	convert_cents_modulus();
+//	shipping_cost_calculator();
+//	conditional_operator();
+	vector <int> v {100,101,103,-50,-99,30,70};
+	cout << "Numbers of intergers presence in vector: " << count_numbers(v) << endl;
 //	cout << "Result: " << summation(8) << endl;
 	return 0;
 }
@@ -220,4 +241,188 @@ void data_conversion(){
 
 	cout << "The sum of the numbers is " << total << endl;
 	cout << "The average of the numbers is " << average << endl;
+
+	double new_average{0.0};
+	new_average = static_cast<double>(total)/count;
+	cout << "The exact average of the numbers is " << new_average << endl;
+
+}
+
+void display_pyramid(){
+	int i{},j{},k{};
+
+	for(k=1;k<=5;k++){
+		for(j=1;j<=5-k;j++){
+			cout << " ";
+		}
+		for(i=1;i<=2*k-1;i++){
+			cout << "*";
+		}
+		cout << endl;
+	}
+}
+
+void logical_operators(int age, bool parental_consent, bool ssn, bool accidents) {
+
+    if ((age >=18 || (age >= 16 && parental_consent)) && ssn && !accidents)
+        cout << "Yes, you can work.";
+
+    return;
+}
+
+void convert_cents(){
+
+	cout << "Please enter amount in cents: ";
+	unsigned int cents{};
+
+	cin >> cents;
+
+	const int dollar{100},quarter{25},dime{10},
+	nickel{5},penny{1};
+
+	unsigned int cents_do{},cents_qu{},cents_di{},
+		cents_ni{},cents_pe{};
+
+	unsigned int current_cents{},balance{};
+
+	cents_do = cents/dollar;
+	current_cents = dollar * cents_do;
+	balance = cents - (dollar * cents_do);
+
+	cents_qu = balance/quarter;
+	current_cents = current_cents + (quarter * cents_qu);
+	balance -= quarter * cents_qu;
+
+	cents_di = balance/dime;
+	current_cents = current_cents + (dime * cents_di);
+	balance -= dime * cents_di;
+
+	cents_ni = balance/nickel;
+	current_cents = current_cents + (nickel * cents_ni);
+	balance -= nickel * cents_ni;
+
+	cents_pe = balance/penny;
+
+
+	cout << "dollars  : " << cents_do << endl;
+	cout << "quarters : " << cents_qu << endl;
+	cout << "dimes    : " << cents_di << endl;
+	cout << "nickels  : " << cents_ni << endl;
+	cout << "pennies  : " << cents_pe << endl;
+
+}
+
+void convert_cents_modulus(){
+
+	cout << "Please enter amount in cents: ";
+	int cents{};
+
+	cin >> cents;
+
+	const int dollar{100},quarter{25},dime{10},nickel{5};
+
+	int cents_do{},cents_qu{},cents_di{},
+		cents_ni{},cents_pe{};
+
+	int balance{};
+
+	cents_do = cents/dollar;
+	balance = cents % dollar;
+
+	cents_qu = balance/quarter;
+	balance %= quarter;
+
+	cents_di = balance/dime;
+	balance %= dime;
+
+	cents_ni = balance/nickel;
+	balance %= nickel;
+
+	cents_pe = balance;
+
+	cout << "dollars  : " << cents_do << endl;
+	cout << "quarters : " << cents_qu << endl;
+	cout << "dimes    : " << cents_di << endl;
+	cout << "nickels  : " << cents_ni << endl;
+	cout << "pennies  : " << cents_pe << endl;
+}
+
+void shipping_cost_calculator(){
+
+	int length{},width{},height{},pkg_volume{};
+	double total_cost{};
+	const double base_cost{2.50};
+	const double greater_100_surcharge{0.10};
+	const double greater_500_surcharge{0.25};
+
+	cout << "Please enter package dimension in inches" << endl;
+	cout << "=========================================" << endl;
+	cout << "\nlength : ";
+	cin >> length;
+	cout << "width : ";
+	cin >> width;
+	cout << "height : ";
+	cin >> height;
+
+	if(length <= 10 && width <= 10 && height <= 10){
+		pkg_volume = length * width * height;
+		if(pkg_volume >= 100 && pkg_volume <= 499){
+			total_cost = base_cost + (base_cost*greater_100_surcharge);
+
+		}
+		else if(pkg_volume >= 500){
+			total_cost = base_cost + (base_cost*greater_500_surcharge);
+
+		}
+		else{
+			total_cost = base_cost;
+		}
+
+		cout << fixed << setprecision(2);
+		cout << "Shipping total cost is $" << total_cost << endl;
+	}
+	else{
+		cout << "Dimension is more than 10 inches!" << endl;
+		cout << "We cannot ship it." << endl;
+	}
+
+}
+
+
+void conditional_operator(){
+
+	int num1{},num2{};
+	cout << "Enter a number: ";
+	cin >> num1 >> num2;
+
+	if(num1 != num2){
+		cout << ((num1 > num2) ? num1 : num2)  << " is larger." << endl;
+		cout << ((num1 < num2) ? num1 : num2)  << " is smaller." << endl;
+	}
+	else{
+		cout << "The values are the same." << endl;
+	}
+}
+
+
+int count_numbers(const vector<int> &vec){
+/*
+*	The type_size size_t is part of the std library. It is the unsigned integer type
+*	result of the sizeof operator since C++11 meaning it cannot be zero or  a negative
+*	number and <int> is a signed type which can have negative numbers. Using int will
+*	work, however will cause warnings with conversions when getting the length of types
+*	such as arrays and vectors . Also,  size_t can theoretically store the maximum size
+*	of a possible object of any type(including arrays and vectors(array.size(); vector.size();
+*	sizeof(vector); sizeof(array);) size_t is commonly used for indexing and loop counting.
+*	When indexing containers like string , array, or vector, the typedef size_type provided
+*	by the containers is usually defined as a synonym for size_t.
+*/
+	int count{0};
+	size_t index{};
+
+	while(index < vec.size() && vec.at(index)!=-99){
+		count++;
+		index++;
+	}
+	return count;
 }
