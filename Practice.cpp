@@ -31,6 +31,8 @@ void convert_cents_modulus();
 void shipping_cost_calculator();
 void conditional_operator();
 int count_numbers(const vector<int> &vec);
+int calculate_pairs(vector<int> vec);
+int points(const std::array<std::string, 10>& games);
 
 int main() {
 
@@ -53,8 +55,12 @@ int main() {
 //	convert_cents_modulus();
 //	shipping_cost_calculator();
 //	conditional_operator();
-	vector <int> v {100,101,103,-50,-99,30,70};
-	cout << "Numbers of intergers presence in vector: " << count_numbers(v) << endl;
+//	vector <int> v {100,101,103,-50,-99,30,70};
+//	cout << "Numbers of intergers presence in vector: " << count_numbers(v) << endl;
+//	vector<int> vec{2,4,6,8};
+//	cout << calculate_pairs(vec) << endl;
+	const std::array<std::string, 10>& games{"1:0","2:0","3:0","4:0","2:1","3:1","4:1","3:2","4:2","4:3"};
+	cout << "count of points: " << points(games) << endl;
 //	cout << "Result: " << summation(8) << endl;
 	return 0;
 }
@@ -425,4 +431,61 @@ int count_numbers(const vector<int> &vec){
 		index++;
 	}
 	return count;
+}
+
+int calculate_pairs(vector<int> vec){
+/*
+ * Given the vector vec to be {1,2,3}, the possible pairs are
+ * (1,2),(1,3) and (2,3). So the result would be (1*2)+(1*3)+(2*3)
+ * which is 11
+ */
+	int result{};
+	for(size_t x{};x<vec.size();x++){
+		for(size_t y{x+1};y<vec.size();y++){
+			result += (vec.at(x)*vec.at(y));
+		}
+	}
+
+	return result;
+}
+
+int points(const std::array<std::string, 10>& games){
+/*
+ * Our football team finished the championship. The result of each match look like "x:y".
+ * Results of all matches are recorded in the collection.
+ * For example: ["3:1", "2:2", "0:1", ...]
+ * Write a function that takes such collection and counts the points of our team in the
+ * championship. Rules for counting points for each match:
+ * if x>y - 3 points
+ * if x<y - 0 point
+ * if x=y - 1 point
+ * Notes:
+
+ * there are 10 matches in the championship
+ * 0 <= x <= 4
+ * 0 <= y <= 4
+ */
+	int count_of_points{};
+	string result_of_match{};
+	string x{},y{};
+	for(auto result:games){
+		result_of_match = result;
+		x = result_of_match.at(0);
+		y = result_of_match.at(2);
+
+//		if(x > y){
+//			count_of_points += 3;
+//		}
+//		else if(x < y){
+//			count_of_points += 0;
+//		}
+//		else if(x == y){
+//			count_of_points += 1;
+//		}
+
+		count_of_points += (x > y)? 3 : (x < y)? 0 : 1;
+
+	}
+
+	return count_of_points;
 }
