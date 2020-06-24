@@ -60,7 +60,7 @@ int main() {
 			case 'A':
 			case 'a':
 				do{
-					cout << "Array size? ";
+					cout << "Vector size? ";
 					cin >> vec_size;
 					while(limit<vec_size){
 						cout << "\nPlease enter an integer to add: ";
