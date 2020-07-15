@@ -11,6 +11,10 @@
 #include <sstream>
 #include <iomanip> //set for precision
 #include <limits> //set for numeric limits
+#include <cstring> //for strcmp
+#include <stdio.h>
+#include <string>
+#include <utility>
 
 using namespace std;
 
@@ -33,6 +37,9 @@ void conditional_operator();
 int count_numbers(const vector<int> &vec);
 int calculate_pairs(vector<int> vec);
 int points(const std::array<std::string, 10>& games);
+int remove_duplicate(std::array<int,5> A,int N);
+std::pair<std::string, std::string> capitalize(const std::string &s);
+unsigned halving_sum(unsigned n);
 
 int main() {
 
@@ -59,9 +66,17 @@ int main() {
 //	cout << "Numbers of intergers presence in vector: " << count_numbers(v) << endl;
 //	vector<int> vec{2,4,6,8};
 //	cout << calculate_pairs(vec) << endl;
-	const std::array<std::string, 10>& games{"1:0","2:0","3:0","4:0","2:1","3:1","4:1","3:2","4:2","4:3"};
-	cout << "count of points: " << points(games) << endl;
+//	const std::array<std::string, 10>& games{"1:0","2:0","3:0","4:0","2:1","3:1","4:1","3:2","4:2","4:3"};
+//	cout << "count of points: " << points(games) << endl;
+//	int N{};
+//	std::array<int,5> A{2,4,2,6,7};
+//	N = sizeof(A)/sizeof(A[0]);
+//	cout << "Size of current array: " << remove_duplicate(A,N) << endl;
+//	capitalize("abracadabra");
+//	cout << strcmp("Hello there" , "Good") << endl;
 //	cout << "Result: " << summation(8) << endl;
+	unsigned n = 127;
+	halving_sum(n);
 	return 0;
 }
 
@@ -488,4 +503,102 @@ int points(const std::array<std::string, 10>& games){
 	}
 
 	return count_of_points;
+}
+
+int remove_duplicate(std::array<int,5> A,int N){
+
+//	int y{1};
+	cout << "Before [ ";
+	for(auto z:A){
+		cout << z << " ";
+	}
+	cout << "]" << endl;
+//	for(int x{0};x<N;x++){
+//		for(int y{1};y<N;y++){
+//			cout << "A[x] first : " << A[x] <<endl;
+//			cout << "A[y] first : " << A[y] <<endl;
+//			if(A[x] == A[y]){
+//				for(int b{y};b<N-1;++b){
+//					cout << "A[b] : " << A[b] <<endl;
+//					cout << "A[b+1] : " << A[b+1] <<endl;
+//					A[b] = A[b+1];
+//
+//				}
+//			}
+//		}
+//	}
+	for(int x{0};x<N;x++){
+
+		for(int y{1};y<N;y++){
+			cout << "\nA[x] first : " << A[x] <<endl;
+			cout << "A[y] first : " << A[y] <<endl;
+			if(A[x] == A[y]){
+//				int a = A[y];
+
+				N -=1;
+				break;
+//				for(int b{y};b<N-1;++b){
+					cout << "A[y] : " << A[y] <<endl;
+					cout << "A[y+1] : " << A[y+1] <<endl;
+
+//				}
+			}
+			A[x] = A[x+1];
+			for(auto z:A){
+				cout << z << " ";
+			}
+		}
+	}
+	cout << "After [ ";
+	for(auto z:A){
+		cout << z << " ";
+	}
+	cout << "]" << endl;
+	int a{};
+	a = sizeof(A)/sizeof(A[0]);
+	return a;
+}
+
+
+std::pair<std::string, std::string> capitalize(const std::string &s)
+{
+
+	std::string letter{};
+    for(size_t digit{0}; digit < s.length(); digit++){
+      if((digit%2) == 0){
+    	  letter += std::toupper(s[digit]);
+      }
+      else{
+    	  letter += std::tolower(s[digit]);
+      }
+    }
+
+    std::string words{};
+    for(size_t digit{0}; digit < s.length(); digit++){
+
+	  if((digit%2) == 0){
+		  words += std::tolower(s[digit]);
+	  }
+	  else{
+		  words += std::toupper(s[digit]);
+	  }
+	}
+
+    cout << "['" << letter << "', '" << words << "' ]" << endl;
+    return {letter, words};
+}
+
+unsigned halving_sum(unsigned n){
+
+	unsigned int division{2};
+	int c{};
+	c = n;
+	while(division < n){
+
+		c += (n/division);
+		division *= 2;
+
+	};
+
+	return c;
 }
