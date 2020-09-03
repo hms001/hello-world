@@ -84,6 +84,7 @@ int *apply_all(const int const *array1,size_t array1_size,const int const *array
 
 	int *result{nullptr};
 	auto size_calc{array1_size*array2_size};
+	//allocating new int size
 	result = new int[size_calc];
 
 	int arr_size{0};
