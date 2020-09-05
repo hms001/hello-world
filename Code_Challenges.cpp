@@ -13,7 +13,7 @@
 
 using namespace std;
 
-//int remove_duplicate(std::array<int,5> A,int N);
+int remove_duplicate(int *A,size_t N);
 bool isDivisible(int n, int x, int y);
 int nbDig(int n, int d);
 string fakeBin(std::string str);
@@ -22,9 +22,9 @@ std::string solve(const std::string& str);
 int main() {
 //	cout << isDivisible(3, 3, 4) << endl;
 //	cout << nbDig(5750, 0) << endl;
-//	std::array<int,5> A{2,4,2,6,7};
-//	N = sizeof(A)/sizeof(A[0]);
-//	cout << "Size of current array: " << remove_duplicate(A,N) << endl;
+	int A[] {2,4,2,6,7};
+	const size_t array1_size {5};
+	cout << "Size of current array: " << remove_duplicate(A,array1_size) << endl;
 //	return 0;
 //	cout << fakeBin("45385593107843568") << endl;
 	string str{"CODe"};
@@ -156,56 +156,56 @@ std::string solve(const std::string& str){
 	return letter;
 }
 
-//int remove_duplicate(std::array<int,5> A,int N){
-//
-////	int y{1};
-//	cout << "Before [ ";
-//	for(auto z:A){
-//		cout << z << " ";
-//	}
-//	cout << "]" << endl;
-////	for(int x{0};x<N;x++){
-////		for(int y{1};y<N;y++){
-////			cout << "A[x] first : " << A[x] <<endl;
-////			cout << "A[y] first : " << A[y] <<endl;
-////			if(A[x] == A[y]){
-////				for(int b{y};b<N-1;++b){
-////					cout << "A[b] : " << A[b] <<endl;
-////					cout << "A[b+1] : " << A[b+1] <<endl;
-////					A[b] = A[b+1];
-////
-////				}
-////			}
-////		}
-////	}
-//	for(int x{0};x<N;x++){
-//
-//		for(int y{1};y<N;y++){
-//			cout << "\nA[x] first : " << A[x] <<endl;
-//			cout << "A[y] first : " << A[y] <<endl;
-//			if(A[x] == A[y]){
-////				int a = A[y];
-//
-//				N -=1;
-//				break;
-////				for(int b{y};b<N-1;++b){
-//					cout << "A[y] : " << A[y] <<endl;
-//					cout << "A[y+1] : " << A[y+1] <<endl;
-//
-////				}
-//			}
-//			A[x] = A[x+1];
-//			for(auto z:A){
-//				cout << z << " ";
-//			}
-//		}
-//	}
-//	cout << "After [ ";
-//	for(auto z:A){
-//		cout << z << " ";
-//	}
-//	cout << "]" << endl;
-//	int a{};
-//	a = sizeof(A)/sizeof(A[0]);
-//	return a;
-//}
+int remove_duplicate(int *A,size_t N){
+/*
+ * find any duplicate num inside array and remove if found
+ * note: only after array position can check now need to improve to check
+ * both before and after array positions
+ */
+
+	cout << "[ " ;
+	for(size_t i{0}; i < N; i++){
+
+		cout << A[i] << " ";
+	}
+	cout << "]" << endl;
+
+	size_t y{};
+	int a{};
+	for(size_t x{0};x<N;x++){
+		a++;
+		cout << "a = " << a << endl;
+		for(y=a;y<N;y++){
+			cout << "N = " << N << endl;
+			cout << "A[x] first : " << A[x] <<endl;
+			cout << "A[y] first : " << A[y] <<endl;
+			if(A[x] == A[y]){
+				cout << "Meet condition" << endl;
+				A[y] = A[y+1];
+				A[y+1] = A[y+2];
+				N--;
+				cout << "A[x] after : " << A[x] <<endl;
+				cout << "A[y] after : " << A[y] <<endl;
+
+			}
+			cout << "Changed [ " ;
+			for(size_t i{0}; i < N; i++){
+
+				cout << A[i] << " ";
+			}
+			cout << "]" << endl;
+		}
+
+
+	}
+	cout << "[ " ;
+	for(size_t i{0}; i < N; i++){
+
+		cout << A[i] << " ";
+	}
+	cout << "]" << endl;
+
+
+	return N;
+}
+
